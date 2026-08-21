@@ -99,6 +99,22 @@
     { key: 'residu', label: 'Residu', color: '#64748b' },
   ];
 
+  var IPS_PERSPECTIVES = [
+    { icon: '📍', label: 'Geografi', copy: 'Hubungan manusia dan lingkungan — bagaimana ruang sekolah dan kota dipengaruhi oleh cara kita mengelola sampah.' },
+    { icon: '👥', label: 'Sosiologi', copy: 'Perilaku sosial dan budaya sekolah — kebiasaan memilah sampah dibentuk oleh norma dan kebiasaan bersama.' },
+    { icon: '💰', label: 'Ekonomi', copy: 'Pola konsumsi yang menghasilkan sampah — setiap barang yang dibeli dan dipakai siswa berakhir sebagai sampah yang harus dikelola.' },
+    { icon: '📜', label: 'Sejarah', copy: 'Perubahan hubungan manusia dengan sumber daya — dari pola konsumsi masa lalu hingga tantangan keberlanjutan hari ini.' },
+  ];
+
+  var RESEARCH_QUESTION = 'Bagaimana teknologi digital dapat membantu siswa memahami hubungan antara perilaku manusia dan keberlanjutan lingkungan?';
+
+  var IMPACT_STEPS = [
+    { icon: '🔍', label: 'Mengetahui masalah', copy: 'Siswa menyadari sampah sekolah sebagai persoalan nyata, bukan sekadar tugas kebersihan.' },
+    { icon: '🧠', label: 'Memahami dampak', copy: 'Siswa mempelajari akibat tiap kategori sampah terhadap lingkungan dan kota tempat mereka tinggal.' },
+    { icon: '🤖', label: 'Menggunakan teknologi', copy: 'Siswa memakai AI untuk mengumpulkan, melatih, dan menguji klasifikasi sampah secara langsung.' },
+    { icon: '🌱', label: 'Melakukan perubahan perilaku', copy: 'Siswa mengambil komitmen dan aksi nyata untuk mengurangi dampak lingkungan dari kebiasaan mereka.' },
+  ];
+
   var ONBOARDING_TAGLINE_OLD = 'Belajar AI lewat aksi pilah sampah sekolah.';
   var ONBOARDING_TAGLINE_NEW = 'Memahami hubungan manusia dan lingkungan melalui teknologi AI.';
 
@@ -220,6 +236,17 @@
     '.sip-eco-sdg-badge{display:inline-block;color:#fff;font-size:11px;font-weight:900;letter-spacing:.05em;padding:4px 10px;border-radius:999px}',
     '.sip-eco-sdg-title{margin-top:8px;font-size:16px;font-weight:900;color:#0f172a}',
     '.sip-eco-sdg-copy{margin-top:6px;font-size:13.5px;line-height:1.6;color:#475569}',
+
+    '.sip-eco-ips-grid{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}',
+    '.sip-eco-ips-item{border:1px solid rgba(226,232,240,.9);background:rgba(255,255,255,.78);border-radius:14px;padding:14px}',
+    '.sip-eco-ips-icon{font-size:20px;line-height:1}',
+    '.sip-eco-ips-label{margin-top:6px;font-size:13.5px;font-weight:900;color:#0f172a}',
+    '.sip-eco-ips-copy{margin-top:4px;font-size:12.5px;color:#64748b;line-height:1.5}',
+    '@media (max-width:560px){.sip-eco-ips-grid{grid-template-columns:1fr}}',
+
+    '.sip-eco-quote-card{border-left:5px solid #15803d}',
+    '.sip-eco-quote-mark{font-size:40px;line-height:1;color:#bbf7d0;font-weight:900;font-family:Georgia,serif}',
+    '.sip-eco-quote-text{margin-top:-6px;font-size:19px;line-height:1.5;font-weight:800;color:#0f172a;max-width:720px}',
   ].join('\n');
 
   function ensureStyles() {
@@ -301,6 +328,92 @@
     content.appendChild(buildLandingHero());
   }
 
+  /* ─── 1C. IPS PERSPECTIVE CARD (Beranda) ─── */
+
+  function buildIpsCard() {
+    var card = document.createElement('div');
+    card.className = 'sip-eco-card';
+    card.setAttribute('data-sip-eco-ips', 'true');
+    var itemsHtml = IPS_PERSPECTIVES.map(function (item) {
+      return (
+        '<div class="sip-eco-ips-item">' +
+          '<div class="sip-eco-ips-icon">' + item.icon + '</div>' +
+          '<div class="sip-eco-ips-label">' + item.label + '</div>' +
+          '<div class="sip-eco-ips-copy">' + item.copy + '</div>' +
+        '</div>'
+      );
+    }).join('');
+    card.innerHTML =
+      '<div class="sip-eco-eyebrow">Landasan Keilmuan</div>' +
+      '<div class="sip-eco-title">🧭 Mengapa SIPILAH Termasuk Kajian IPS?</div>' +
+      '<p class="sip-eco-copy">Masalah sampah sekolah bukan hanya soal teknologi — ia bisa dibaca lewat empat sudut pandang Ilmu Pengetahuan Sosial sekaligus.</p>' +
+      '<div class="sip-eco-ips-grid">' + itemsHtml + '</div>';
+    return card;
+  }
+
+  function mountIpsCard() {
+    var existing = document.querySelector('[data-sip-eco-ips]');
+    if (!isHomeVisible()) {
+      if (existing) existing.remove();
+      return;
+    }
+    if (existing) return;
+    var content = document.querySelector('main > div.flex-1') || document.querySelector('main');
+    if (!content) return;
+    content.appendChild(buildIpsCard());
+  }
+
+  /* ─── 1D. RESEARCH QUESTION CARD (Beranda) ─── */
+
+  function buildResearchQuestionCard() {
+    var card = document.createElement('div');
+    card.className = 'sip-eco-card sip-eco-quote-card';
+    card.setAttribute('data-sip-eco-research', 'true');
+    card.innerHTML =
+      '<div class="sip-eco-eyebrow">Pertanyaan Utama</div>' +
+      '<div class="sip-eco-quote-mark">&ldquo;</div>' +
+      '<div class="sip-eco-quote-text">' + RESEARCH_QUESTION + '</div>';
+    return card;
+  }
+
+  function mountResearchQuestion() {
+    var existing = document.querySelector('[data-sip-eco-research]');
+    if (!isHomeVisible()) {
+      if (existing) existing.remove();
+      return;
+    }
+    if (existing) return;
+    var content = document.querySelector('main > div.flex-1') || document.querySelector('main');
+    if (!content) return;
+    content.appendChild(buildResearchQuestionCard());
+  }
+
+  /* ─── 1E. IMPACT JOURNEY CARD (Beranda) — "Dari Kesadaran Menjadi Aksi" ─── */
+
+  function buildImpactJourneyCard() {
+    var card = document.createElement('div');
+    card.className = 'sip-eco-card';
+    card.setAttribute('data-sip-eco-impact', 'true');
+    card.innerHTML =
+      '<div class="sip-eco-eyebrow">Narasi Penelitian</div>' +
+      '<div class="sip-eco-title">🚀 Dari Kesadaran Menjadi Aksi</div>' +
+      '<p class="sip-eco-copy">SIPILAH mengajak siswa bergerak dari sekadar tahu menjadi benar-benar berubah, lewat empat tahap sederhana.</p>' +
+      buildStepFlowHtml(IMPACT_STEPS);
+    return card;
+  }
+
+  function mountImpactJourney() {
+    var existing = document.querySelector('[data-sip-eco-impact]');
+    if (!isHomeVisible()) {
+      if (existing) existing.remove();
+      return;
+    }
+    if (existing) return;
+    var content = document.querySelector('main > div.flex-1') || document.querySelector('main');
+    if (!content) return;
+    content.appendChild(buildImpactJourneyCard());
+  }
+
   /* ─── 2. WASTE JOURNEY (Dataset Sampah) ─── */
 
   function isDatasetVisible() {
@@ -319,27 +432,30 @@
     return main ? main.querySelector('[class*="space-y"]') || main : null;
   }
 
-  function buildJourneyCard() {
-    var card = document.createElement('div');
-    card.className = 'sip-eco-card';
-    card.setAttribute('data-sip-eco-journey', 'true');
-    var stepsHtml = JOURNEY_STEPS.map(function (step, i) {
+  function buildStepFlowHtml(steps) {
+    return '<div class="sip-eco-journey-row">' + steps.map(function (step, i) {
       var stepHtml =
         '<div class="sip-eco-journey-step">' +
           '<div class="sip-eco-journey-icon">' + step.icon + '</div>' +
           '<div class="sip-eco-journey-label">' + step.label + '</div>' +
           '<div class="sip-eco-journey-copy">' + step.copy + '</div>' +
         '</div>';
-      if (i < JOURNEY_STEPS.length - 1) {
+      if (i < steps.length - 1) {
         stepHtml += '<div class="sip-eco-journey-arrow">→</div>';
       }
       return stepHtml;
-    }).join('');
+    }).join('') + '</div>';
+  }
+
+  function buildJourneyCard() {
+    var card = document.createElement('div');
+    card.className = 'sip-eco-card';
+    card.setAttribute('data-sip-eco-journey', 'true');
     card.innerHTML =
       '<div class="sip-eco-eyebrow">Ekopedagogi &middot; Waste Journey</div>' +
       '<div class="sip-eco-title">🔄 Perjalanan Sampah: Dari Konsumsi Sampai Dampaknya</div>' +
       '<p class="sip-eco-copy">Setiap sampah yang kamu foto di halaman ini punya perjalanan panjang sebelum dan sesudah keluar dari tangan kita. Memilah adalah satu titik kecil dari perjalanan yang lebih besar.</p>' +
-      '<div class="sip-eco-journey-row">' + stepsHtml + '</div>';
+      buildStepFlowHtml(JOURNEY_STEPS);
     return card;
   }
 
@@ -695,7 +811,10 @@
   function syncAll() {
     ensureStyles();
     mountLandingHero();
+    mountResearchQuestion();
+    mountIpsCard();
     mountAwareness();
+    mountImpactJourney();
     mountWasteData();
     mountJourney();
     patchOnboardingTagline();
