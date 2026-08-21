@@ -99,11 +99,13 @@
     { key: 'residu', label: 'Residu', color: '#64748b' },
   ];
 
+  var IPS_IDENTITY = 'SIPILAH mengintegrasikan kajian IPS melalui pemahaman hubungan manusia dengan lingkungan.';
+
   var IPS_PERSPECTIVES = [
-    { icon: '📍', label: 'Geografi', copy: 'Hubungan manusia dan lingkungan — bagaimana ruang sekolah dan kota dipengaruhi oleh cara kita mengelola sampah.' },
-    { icon: '👥', label: 'Sosiologi', copy: 'Perilaku sosial dan budaya sekolah — kebiasaan memilah sampah dibentuk oleh norma dan kebiasaan bersama.' },
-    { icon: '💰', label: 'Ekonomi', copy: 'Pola konsumsi yang menghasilkan sampah — setiap barang yang dibeli dan dipakai siswa berakhir sebagai sampah yang harus dikelola.' },
-    { icon: '📜', label: 'Sejarah', copy: 'Perubahan hubungan manusia dengan sumber daya — dari pola konsumsi masa lalu hingga tantangan keberlanjutan hari ini.' },
+    { icon: '📍', label: 'Geografi', copy: 'Hubungan aktivitas manusia dengan kondisi lingkungan.' },
+    { icon: '👥', label: 'Sosiologi', copy: 'Perilaku sosial dan budaya sekolah dalam menjaga lingkungan.' },
+    { icon: '💰', label: 'Ekonomi', copy: 'Pola konsumsi manusia yang menghasilkan sampah.' },
+    { icon: '📜', label: 'Sejarah', copy: 'Perubahan hubungan manusia dengan sumber daya alam.' },
   ];
 
   var RESEARCH_QUESTION = 'Bagaimana teknologi digital dapat membantu siswa memahami hubungan antara perilaku manusia dan keberlanjutan lingkungan?';
@@ -115,8 +117,34 @@
     { icon: '🌱', label: 'Melakukan perubahan perilaku', copy: 'Siswa mengambil komitmen dan aksi nyata untuk mengurangi dampak lingkungan dari kebiasaan mereka.' },
   ];
 
-  var ONBOARDING_TAGLINE_OLD = 'Belajar AI lewat aksi pilah sampah sekolah.';
-  var ONBOARDING_TAGLINE_NEW = 'Memahami hubungan manusia dan lingkungan melalui teknologi AI.';
+  /* Peta rebranding label KKA → Ekopedagogi. Urutan PENTING: frasa/kalimat
+     panjang & spesifik harus lebih dulu dari kata pendek generik ("KKA" saja),
+     supaya penggantian tidak "termakan" duluan oleh aturan yang lebih umum. */
+  var REBRANDING_MAP = [
+    ['Belajar AI lewat aksi pilah sampah sekolah.', 'Memahami hubungan manusia dan lingkungan melalui teknologi AI.'],
+    ['Uji pemahaman awalmu tentang AI, dataset, dan pemilahan sampah — sebelum mulai proyek.',
+      'Uji pemahaman awal siswa tentang hubungan manusia, lingkungan, sampah, dan perilaku berkelanjutan — sebelum mulai proyek.'],
+    ['Uji pemahaman akhirmu setelah menyelesaikan 4 pertemuan SIPILAH.',
+      'Lihat perubahan pemahaman ekologis siswa setelah menyelesaikan 4 pertemuan SIPILAH.'],
+    ['Pre-Test SIPILAH', 'Eksplorasi Awal Kesadaran Ekologis'],
+    ['Post-Test SIPILAH', 'Refleksi Perubahan Pemahaman Ekologis'],
+    ['Computer Vision adalah cabang KKA yang membuat komputer dapat “melihat” gambar. Dalam SIPILAH, model belajar membedakan plastik, kertas, organik, dan residu.',
+      'Teknologi AI dalam SIPILAH membantu mengenali pola visual pada foto sampah — sebagai alat bantu, bukan tujuan utama. Yang lebih penting adalah bagaimana siswa memahami hubungan manusia, lingkungan, dan keberlanjutan lewat proses ini.'],
+    ['Belajar Kecerdasan Artifisial melalui aksi pilah sampah sekolah. Laporan ini dihasilkan otomatis berdasarkan data dataset dan pengujian model.',
+      'Memahami hubungan manusia dan lingkungan melalui teknologi AI. Laporan ini dihasilkan otomatis dari proses pembelajaran ekopedagogi dan refleksi siswa.'],
+    ['Disusun selaras Capaian Pembelajaran KKA fase D (kelas 7–9).', 'Disusun selaras pendekatan ekopedagogi dan Capaian Pembelajaran IPS fase D (kelas 7–9).'],
+    ['pembelajaran KKA tidak meninggalkan mereka', 'pembelajaran ekopedagogi tidak meninggalkan mereka'],
+    ['sampah dan AI sama pentingnya untuk semua siswa', 'lingkungan dan keberlanjutan sama pentingnya untuk semua siswa'],
+    ['Sistem Pemilahan Sampah berbasis KKA', 'Media Pembelajaran Ekopedagogi Digital Berbasis AI'],
+    ['Media Ajar KKA · SMP', 'Media Pembelajaran Ekopedagogi Digital · SMP'],
+    ['Perjalanan belajar KKA', 'Perjalanan Belajar Ekopedagogi'],
+    ['Hubungkan KKA dengan aksi nyata.', 'Hubungkan pembelajaran ekopedagogi dengan aksi nyata.'],
+    ['Kompetensi KKA', 'Kompetensi yang Dilatih'],
+    ['KKA · Web Offline', 'Ekopedagogi Digital · Web Offline'],
+    ['Computer Vision', 'Teknologi AI Pendukung'],
+    ['Computational Thinking', 'Kesadaran Ekologis'],
+    ['KKA', 'Ekopedagogi Digital'],
+  ];
 
   var ECO_THROTTLE_MS = 6000;
 
@@ -346,7 +374,7 @@
     card.innerHTML =
       '<div class="sip-eco-eyebrow">Landasan Keilmuan</div>' +
       '<div class="sip-eco-title">🧭 Mengapa SIPILAH Termasuk Kajian IPS?</div>' +
-      '<p class="sip-eco-copy">Masalah sampah sekolah bukan hanya soal teknologi — ia bisa dibaca lewat empat sudut pandang Ilmu Pengetahuan Sosial sekaligus.</p>' +
+      '<p class="sip-eco-copy"><strong>' + IPS_IDENTITY + '</strong> Masalah sampah sekolah bukan hanya soal teknologi — ia bisa dibaca lewat empat sudut pandang Ilmu Pengetahuan Sosial sekaligus.</p>' +
       '<div class="sip-eco-ips-grid">' + itemsHtml + '</div>';
     return card;
   }
@@ -792,18 +820,608 @@
     });
   }
 
-  /* ─── BRANDING AWAL: ganti tagline onboarding tanpa mengubah bundle.js ─── */
+  /* ─── REBRANDING LABEL: ganti teks KKA/AI-sentris di dalam bundle.js
+     lewat penulisan ulang text node, tanpa menyentuh bundle.js maupun
+     logika/komponennya. Aman untuk teks campuran (mis. kalimat yang
+     sebagian di dalam tag <i>) karena bekerja di level text node. ─── */
 
-  function patchOnboardingTagline() {
-    var bodyText = document.body ? document.body.textContent || '' : '';
-    if (bodyText.indexOf(ONBOARDING_TAGLINE_OLD) === -1) return;
-    var nodes = document.querySelectorAll('div');
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i];
-      if (el.childElementCount === 0 && el.textContent.trim() === ONBOARDING_TAGLINE_OLD) {
-        el.textContent = ONBOARDING_TAGLINE_NEW;
-      }
+  function patchRebranding() {
+    if (!document.body) return;
+    var bodyText = document.body.textContent || '';
+    var mightHaveTargets = false;
+    for (var c = 0; c < REBRANDING_MAP.length; c++) {
+      if (bodyText.indexOf(REBRANDING_MAP[c][0]) !== -1) { mightHaveTargets = true; break; }
     }
+    if (!mightHaveTargets) return;
+
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var value = node.nodeValue;
+      if (!value) continue;
+      for (var i = 0; i < REBRANDING_MAP.length; i++) {
+        var oldStr = REBRANDING_MAP[i][0];
+        if (value.indexOf(oldStr) !== -1) {
+          value = value.split(oldStr).join(REBRANDING_MAP[i][1]);
+        }
+      }
+      if (value !== node.nodeValue) node.nodeValue = value;
+    }
+  }
+
+  /* ─── BAGIAN 2 & 3: EKSPLORASI AWAL & REFLEKSI PERUBAHAN (Pre/Post-Test) ───
+     bundle.js menyimpan SATU pool berisi 20 soal (p_all) lalu mengacak dan
+     mengambil 10 untuk Pre-Test MAUPUN Post-Test (komponen quiz yang sama,
+     dibedakan lewat prop "kind"). Karena logika acak & skor sepenuhnya ada
+     di bundle.js dan tidak boleh disentuh, pendekatan yang aman adalah:
+     menuliskan ULANG teks (topik, pertanyaan, 4 opsi) pada elemen yang
+     sedang dirender — persis di INDEKS opsi yang sama dengan aslinya — agar
+     logika "correct" (berbasis indeks, bukan teks) tetap bekerja seperti
+     semula. Setiap soal asli (20) punya dua versi pengganti: "pretest"
+     (eksploratif/dasar) dan "posttest" (reflektif/analitis lebih tinggi).
+     Karena bundle.js mengacak 10 dari 20 secara acak murni, distribusi
+     kategori A/B/C/D pada satu sesi mendekati rata-rata rasio pool
+     (bukan dijamin persis di setiap sesi) — lihat catatan di ringkasan. */
+
+  var QUIZ_BANK = [
+    // Kategori A — Hubungan Manusia dan Lingkungan (asal id1-6)
+    {
+      originalQ: 'Apa yang dilakukan kecerdasan artifisial dalam SIPILAH?',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Aktivitas manusia dapat memengaruhi lingkungan karena...',
+        opts: [
+          'Manusia tidak pernah menggunakan sumber daya alam',
+          'Setiap kegiatan manusia—makan, membeli, membuang—melibatkan sumber daya dan menghasilkan dampak pada lingkungan',
+          'Lingkungan tidak berhubungan dengan kehidupan sehari-hari manusia',
+          'Alam akan selalu pulih dengan sendirinya tanpa dipengaruhi manusia',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Setelah menggunakan SIPILAH, siswa mampu memahami bahwa masalah sampah sekolah sebenarnya adalah cerminan dari...',
+        opts: [
+          'Kesalahan petugas kebersihan semata',
+          'Pola perilaku dan kebiasaan seluruh warga sekolah dalam berinteraksi dengan lingkungan',
+          'Kekurangan tempat sampah di sekolah',
+          'Hal yang tidak bisa diubah',
+        ],
+      },
+    },
+    {
+      originalQ: 'Apa yang dimaksud dengan dataset seimbang?',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Sampah yang menumpuk di lingkungan sekolah paling banyak disebabkan oleh...',
+        opts: [
+          'Cuaca yang berubah-ubah',
+          'Jumlah siswa yang sedikit',
+          'Kebiasaan konsumsi dan cara membuang barang sehari-hari',
+          'Letak sekolah yang jauh dari kota',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Dibandingkan sebelum menggunakan SIPILAH, cara pandang siswa terhadap foto sampah yang mereka kumpulkan seharusnya berubah menjadi...',
+        opts: [
+          'Sekadar tugas mengumpulkan foto sebanyak-banyaknya',
+          'Kegiatan yang tidak berhubungan dengan kehidupan nyata',
+          'Bukti nyata dari kebiasaan konsumsi dan pembuangan sampah di sekolah mereka sendiri',
+          'Sekadar bahan untuk melatih program komputer',
+        ],
+      },
+    },
+    {
+      originalQ: 'Mengapa label foto harus benar?',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Mengapa hubungan manusia dan lingkungan penting dipelajari dalam IPS?',
+        opts: [
+          'Karena IPS hanya membahas sejarah',
+          'Karena kehidupan manusia tidak bisa dipisahkan dari ruang dan lingkungan tempat tinggalnya',
+          'Karena lingkungan tidak berkaitan dengan kehidupan sosial',
+          'Karena hanya ilmuwan alam yang perlu memahaminya',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Setelah menyelesaikan proyek SIPILAH, siswa diharapkan menyadari bahwa memahami masalah lingkungan membutuhkan...',
+        opts: [
+          'Hanya pengetahuan teknologi tanpa pemahaman sosial',
+          'Perpaduan cara pandang IPS (manusia-lingkungan) dan kemampuan menganalisis data',
+          'Hafalan istilah ilmiah semata',
+          'Keputusan sepihak dari satu orang',
+        ],
+      },
+    },
+    {
+      originalQ: 'Apa yang dilakukan AI saat "dilatih"?',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Salah satu contoh interaksi manusia dengan lingkungan di sekolah adalah...',
+        opts: [
+          'Siswa belajar di kelas tanpa menghasilkan sampah',
+          'Sekolah tidak menggunakan sumber daya apa pun',
+          'Siswa membeli jajanan yang bungkusnya menjadi sampah setelah dipakai',
+          'Guru mengajar tanpa alat tulis',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Proses mengumpulkan dan mengamati foto sampah dalam SIPILAH mengajarkan siswa bahwa pemahaman yang baik tentang suatu masalah lingkungan diperoleh melalui...',
+        opts: [
+          'Menebak jawaban tanpa data',
+          'Mengabaikan pola yang muncul dari kenyataan di lapangan',
+          'Belajar dari data/pengamatan nyata secara berulang untuk menemukan pola',
+          'Menyalin pendapat orang lain tanpa verifikasi',
+        ],
+      },
+    },
+    {
+      originalQ: 'Mengapa kita uji model dengan gambar BARU (di luar dataset latih)?',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Ruang (tempat) memengaruhi jenis sampah yang dihasilkan sekolah karena...',
+        opts: [
+          'Setiap sekolah menghasilkan jenis sampah yang selalu sama',
+          'Lingkungan sekitar sekolah—misalnya dekat kantin atau pasar—memengaruhi jenis dan jumlah sampah yang muncul',
+          'Ruang tidak berpengaruh pada kegiatan manusia',
+          'Sampah hanya dihasilkan di rumah, bukan di sekolah',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Mengapa penting menguji pemahaman kita dengan situasi lingkungan yang belum pernah kita temui sebelumnya, bukan hanya yang sudah kita pelajari?',
+        opts: [
+          'Agar terlihat lebih pintar',
+          'Untuk mengetahui apakah pemahaman kita benar-benar bisa diterapkan pada situasi lingkungan baru, bukan sekadar hafalan',
+          'Karena tidak ada gunanya',
+          'Agar cepat selesai',
+        ],
+      },
+    },
+    {
+      originalQ: 'Akurasi model 80% artinya...',
+      pretest: {
+        topic: 'Hubungan Manusia & Lingkungan',
+        q: 'Jika banyak sekolah di suatu kota tidak mengelola sampah dengan baik, dampaknya adalah...',
+        opts: [
+          'Tidak ada dampak karena sekolah bukan bagian dari kota',
+          'Kualitas lingkungan kota—air, tanah, dan udara—bisa ikut menurun',
+          'Kota akan otomatis menjadi lebih bersih',
+          'Hanya berdampak pada satu sekolah saja',
+        ],
+      },
+      posttest: {
+        topic: 'Perubahan Cara Berpikir',
+        q: 'Jika hasil refleksi menunjukkan pemahaman siswa belum sepenuhnya tepat, sikap yang tepat setelah proyek SIPILAH adalah...',
+        opts: [
+          'Berhenti belajar karena sudah gagal',
+          'Menjadikan kekeliruan sebagai bahan refleksi untuk memperbaiki pemahaman dan tindakan selanjutnya',
+          'Menyalahkan sistem penilaian',
+          'Mengabaikan hasil evaluasi',
+        ],
+      },
+    },
+    // Kategori B — Sampah dan Keberlanjutan (asal id7-12)
+    {
+      originalQ: 'Kulit pisang masuk kategori sampah...',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Mengapa pemilahan sampah penting dilakukan?',
+        opts: [
+          'Supaya sampah terlihat lebih rapi di tempat sampah',
+          'Agar petugas kebersihan bekerja lebih cepat',
+          'Agar sampah bisa diproses sesuai jenisnya sehingga lebih mudah didaur ulang atau dikelola dengan tepat',
+          'Karena diwajibkan tanpa alasan lingkungan',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: 'Setelah proyek SIPILAH, siswa memahami bahwa tindakan memilah sampah bermakna penting karena...',
+        opts: [
+          'Hanya membuat tempat sampah terlihat rapi',
+          'Merupakan formalitas tugas sekolah semata',
+          'Merupakan langkah nyata yang menghubungkan perilaku individu dengan kualitas lingkungan bersama',
+          'Tidak memiliki manfaat jangka panjang',
+        ],
+      },
+    },
+    {
+      originalQ: 'Tisu basah bekas pakai masuk kategori...',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Sampah organik yang tidak dipilah dan berakhir di TPA dapat menyebabkan...',
+        opts: [
+          'Tanah menjadi lebih subur secara otomatis',
+          'Tidak ada dampak apa pun',
+          'Pembusukan yang menghasilkan gas metana, penyumbang pemanasan global',
+          'Sampah berubah menjadi plastik',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: "Pemahaman siswa tentang sampah organik yang tidak terkelola berubah setelah SIPILAH, dari sekadar 'sampah basah' menjadi...",
+        opts: [
+          'Sesuatu yang tidak penting untuk dipikirkan',
+          'Sampah yang paling mudah diabaikan',
+          'Sumber gas rumah kaca yang berkontribusi pada perubahan iklim jika dibiarkan menumpuk',
+          'Jenis sampah yang paling berharga',
+        ],
+      },
+    },
+    {
+      originalQ: 'Memecah masalah besar (pilah sampah sekolah) menjadi langkah-langkah kecil disebut...',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Konsep keberlanjutan (sustainability) berarti...',
+        opts: [
+          'Menggunakan sumber daya sebanyak-banyaknya untuk generasi sekarang',
+          'Memenuhi kebutuhan saat ini tanpa merusak kemampuan generasi mendatang memenuhi kebutuhannya',
+          'Menghentikan semua kegiatan produksi dan konsumsi',
+          'Hanya berlaku untuk negara maju',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: 'Hubungan sebab-akibat antara perilaku manusia dan lingkungan yang dipelajari lewat SIPILAH menunjukkan bahwa...',
+        opts: [
+          'Lingkungan tidak dipengaruhi oleh manusia sama sekali',
+          'Kebiasaan kecil yang dilakukan berulang oleh banyak orang dapat menimbulkan dampak lingkungan yang besar',
+          'Hanya industri besar yang memengaruhi lingkungan',
+          'Perilaku individu tidak pernah berpengaruh signifikan',
+        ],
+      },
+    },
+    {
+      originalQ: 'Jika model sering keliru pada kategori kertas, langkah perbaikan yang TEPAT?',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Jika sekolah ingin mengurangi jumlah sampah residu (sulit didaur ulang), langkah paling tepat adalah...',
+        opts: [
+          'Membiarkan saja karena residu tidak berbahaya',
+          'Membakar semua sampah residu di halaman sekolah',
+          'Mengurangi penggunaan barang sekali pakai dan memilah sejak awal',
+          'Menambah jumlah tempat sampah tanpa memilah',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: 'Jika suatu kota memiliki banyak sekolah yang menerapkan pemilahan sampah seperti SIPILAH, dampak jangka panjang bagi kota tersebut adalah...',
+        opts: [
+          'Tidak ada perubahan berarti',
+          'Kota menjadi lebih padat penduduk',
+          'Beban sampah residu di kota berkurang dan kesadaran lingkungan warga meningkat',
+          'Sekolah kehilangan waktu belajar',
+        ],
+      },
+    },
+    {
+      originalQ: 'Dalam SIPILAH, model AI bisa mengenali jenis sampah karena...',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Sampah kertas berbeda dari sampah plastik dalam hal keberlanjutan karena...',
+        opts: [
+          'Kertas tidak berasal dari sumber daya alam',
+          'Kertas lebih cepat terurai dan lebih mudah didaur ulang dibanding plastik',
+          'Plastik selalu lebih ramah lingkungan',
+          'Keduanya sama sekali tidak bisa didaur ulang',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: 'Setelah menggunakan SIPILAH, siswa memahami bahwa memilah sampah kertas berkaitan langsung dengan upaya...',
+        opts: [
+          'Menambah jumlah sampah di sekolah',
+          'Mengurangi tekanan terhadap penebangan pohon melalui daur ulang',
+          'Membuat kertas menjadi lebih mahal',
+          'Menghentikan seluruh penggunaan kertas di sekolah',
+        ],
+      },
+    },
+    {
+      originalQ: 'Dataset yang baik untuk melatih AI klasifikasi sampah harus...',
+      pretest: {
+        topic: 'Sampah & Keberlanjutan',
+        q: 'Praktik memilah sampah di sekolah adalah bentuk kontribusi terhadap...',
+        opts: [
+          'Menambah pekerjaan tanpa manfaat',
+          'Kegiatan yang hanya berlaku di negara lain',
+          'Upaya keberlanjutan lingkungan yang dimulai dari lingkup terkecil, yaitu sekolah',
+          'Aturan sekolah yang tidak berkaitan dengan lingkungan',
+        ],
+      },
+      posttest: {
+        topic: 'Hubungan Perilaku & Lingkungan',
+        q: 'Kebiasaan memilah sampah yang dibangun di sekolah paling tepat dipahami sebagai...',
+        opts: [
+          'Kegiatan sekali jadi yang selesai setelah proyek berakhir',
+          'Aturan yang tidak berkaitan dengan kehidupan siswa di luar sekolah',
+          'Budaya berkelanjutan yang idealnya terus dibawa siswa ke lingkungan rumah dan masyarakat',
+          'Tanggung jawab yang hanya dimiliki petugas kebersihan',
+        ],
+      },
+    },
+    // Kategori C — Perilaku Ramah Lingkungan (asal id13-16)
+    {
+      originalQ: 'Saat melabeli foto sampah, yang paling penting adalah...',
+      pretest: {
+        topic: 'Perilaku Ramah Lingkungan',
+        q: 'Contoh perilaku ramah lingkungan yang bisa dilakukan siswa sehari-hari adalah...',
+        opts: [
+          'Membeli minuman kemasan sekali pakai setiap hari',
+          'Membawa botol minum sendiri agar mengurangi sampah plastik',
+          'Membuang sampah sembarangan agar cepat',
+          'Menggunakan kertas sebanyak-banyaknya tanpa berpikir',
+        ],
+      },
+      posttest: {
+        topic: 'Dampak Konsumsi',
+        q: 'Setelah SIPILAH, siswa memahami bahwa mengurangi penggunaan plastik sekali pakai adalah bentuk tindakan yang berkaitan langsung dengan...',
+        opts: [
+          'Menambah variasi jajanan di kantin',
+          'Menekan jumlah sampah yang dihasilkan dari kebiasaan konsumsi sehari-hari',
+          'Meningkatkan penjualan produk kemasan',
+          'Membuat kantin sekolah lebih ramai',
+        ],
+      },
+    },
+    {
+      originalQ: 'Transfer Learning mempercepat pelatihan AI karena...',
+      pretest: {
+        topic: 'Perilaku Ramah Lingkungan',
+        q: 'Mengapa kebiasaan kecil seperti membawa bekal dari rumah bisa berdampak besar bagi lingkungan?',
+        opts: [
+          'Karena tidak ada hubungannya dengan sampah',
+          'Karena jika dilakukan banyak siswa secara rutin, jumlah sampah kemasan yang dihasilkan berkurang signifikan',
+          'Karena bekal selalu lebih mahal',
+          'Karena hanya berlaku untuk satu orang saja',
+        ],
+      },
+      posttest: {
+        topic: 'Dampak Konsumsi',
+        q: 'Kesadaran tentang dampak konsumsi yang dibangun lewat SIPILAH mengajarkan bahwa setiap barang yang dibeli siswa...',
+        opts: [
+          'Tidak memiliki hubungan dengan sampah yang dihasilkan',
+          'Pada akhirnya akan menjadi sampah yang harus dikelola oleh lingkungan sekitar',
+          'Selalu ramah lingkungan tanpa syarat',
+          'Tidak perlu dipikirkan dampaknya',
+        ],
+      },
+    },
+    {
+      originalQ: 'Mengapa model diuji dengan foto yang BERBEDA dari dataset latih?',
+      pretest: {
+        topic: 'Perilaku Ramah Lingkungan',
+        q: 'Sikap yang sebaiknya dimiliki siswa ketika melihat sampah berserakan di sekolah adalah...',
+        opts: [
+          'Mengabaikannya karena bukan tanggung jawabnya',
+          'Menyalahkan petugas kebersihan',
+          'Ikut peduli dengan memungut atau melaporkannya agar segera dikelola',
+          'Menambah sampah karena sudah kotor',
+        ],
+      },
+      posttest: {
+        topic: 'Dampak Konsumsi',
+        q: 'Setelah memahami dampak konsumsi lewat SIPILAH, langkah paling tepat yang bisa diambil siswa adalah...',
+        opts: [
+          'Terus mengonsumsi seperti biasa tanpa perubahan',
+          'Menyalahkan produsen sepenuhnya tanpa introspeksi diri',
+          'Mulai memilih dan mengurangi konsumsi barang yang berpotensi menjadi sampah sulit terurai',
+          'Berhenti menggunakan barang apa pun',
+        ],
+      },
+    },
+    {
+      originalQ: "Jika akurasi uji model SIPILAH-mu adalah 65%, artinya...",
+      pretest: {
+        topic: 'Perilaku Ramah Lingkungan',
+        q: 'Perilaku ramah lingkungan di sekolah paling baik dibangun melalui...',
+        opts: [
+          'Hukuman yang berat bagi yang melanggar',
+          'Larangan tanpa penjelasan',
+          'Kebiasaan dan budaya sekolah yang konsisten, bukan aturan sesaat',
+          'Kegiatan yang hanya dilakukan sekali dalam setahun',
+        ],
+      },
+      posttest: {
+        topic: 'Dampak Konsumsi',
+        q: 'Dampak konsumsi yang dipelajari melalui SIPILAH paling tepat dipahami sebagai hubungan antara...',
+        opts: [
+          'Harga barang dan kualitas kemasan',
+          'Jumlah uang saku dan nilai pelajaran',
+          'Pilihan konsumsi individu dan jumlah sampah yang akhirnya harus ditanggung lingkungan',
+          'Merek produk dan popularitas di sekolah',
+        ],
+      },
+    },
+    // Kategori D — SDGs dan Pembangunan Berkelanjutan (asal id17-20)
+    {
+      originalQ: 'Sedotan plastik minuman yang sudah terpakai termasuk kategori sampah...',
+      pretest: {
+        topic: 'SDGs & Pembangunan Berkelanjutan',
+        q: 'SDGs (Sustainable Development Goals) adalah agenda global yang bertujuan untuk...',
+        opts: [
+          'Menghentikan pembangunan di semua negara',
+          'Memaksimalkan keuntungan ekonomi tanpa memperhatikan lingkungan',
+          'Mewujudkan pembangunan yang seimbang antara aspek sosial, ekonomi, dan lingkungan',
+          'Hanya berfokus pada negara-negara maju',
+        ],
+      },
+      posttest: {
+        topic: 'Tindakan Keberlanjutan',
+        q: 'Setelah menyelesaikan SIPILAH, tindakan keberlanjutan yang paling tepat dilakukan siswa di sekolah adalah...',
+        opts: [
+          'Menunggu pihak sekolah bertindak tanpa keterlibatan siswa',
+          'Menganggap proyek selesai setelah laporan dikumpulkan',
+          'Mempraktikkan dan mengajak orang lain melakukan pemilahan sampah secara konsisten',
+          'Membandingkan sekolah sendiri dengan sekolah lain tanpa aksi nyata',
+        ],
+      },
+    },
+    {
+      originalQ: 'Kertas HVS bekas coretan yang kering dan bersih termasuk kategori...',
+      pretest: {
+        topic: 'SDGs & Pembangunan Berkelanjutan',
+        q: 'Kegiatan memilah sampah di sekolah paling berkaitan dengan tujuan SDG nomor...',
+        opts: [
+          'SDG 1 - Tanpa Kemiskinan',
+          'SDG 2 - Tanpa Kelaparan',
+          'SDG 6 - Air Bersih dan Sanitasi Layak',
+          'SDG 12 - Konsumsi dan Produksi yang Bertanggung Jawab',
+        ],
+      },
+      posttest: {
+        topic: 'Tindakan Keberlanjutan',
+        q: "Komitmen aksi seperti 'membawa botol minum sendiri' yang diambil siswa setelah SIPILAH paling berkaitan dengan tujuan...",
+        opts: [
+          'Menambah barang bawaan ke sekolah',
+          'Mengikuti tren tanpa alasan tertentu',
+          'Menghemat uang jajan semata',
+          'Konsumsi dan produksi yang bertanggung jawab (SDG 12)',
+        ],
+      },
+    },
+    {
+      originalQ: 'Abstraksi dalam proyek SIPILAH ditunjukkan dengan...',
+      pretest: {
+        topic: 'SDGs & Pembangunan Berkelanjutan',
+        q: "SDG 11 tentang 'Kota dan Komunitas Berkelanjutan' berkaitan dengan sekolah karena...",
+        opts: [
+          'Sekolah tidak termasuk bagian dari kota',
+          'Sekolah adalah bagian dari komunitas kota yang ikut menentukan kualitas ruang hidup bersama',
+          'SDG 11 hanya berlaku untuk pemerintah kota',
+          'Sekolah tidak memiliki pengaruh terhadap lingkungan kota',
+        ],
+      },
+      posttest: {
+        topic: 'Tindakan Keberlanjutan',
+        q: 'Tindakan keberlanjutan yang dibangun siswa di sekolah, jika dilakukan konsisten oleh banyak sekolah, dapat berkontribusi pada terciptanya...',
+        opts: [
+          'Sekolah yang terisolasi dari lingkungan kota',
+          'Komunitas kota yang lebih layak huni dan berkelanjutan',
+          'Persaingan antar sekolah yang tidak sehat',
+          'Beban tambahan bagi pemerintah kota',
+        ],
+      },
+    },
+    {
+      originalQ: 'Aksi nyata yang paling relevan setelah menyelesaikan proyek SIPILAH adalah...',
+      pretest: {
+        topic: 'SDGs & Pembangunan Berkelanjutan',
+        q: 'Pembangunan berkelanjutan penting dipelajari siswa sejak dini karena...',
+        opts: [
+          'Agar siswa bisa menjadi pejabat pemerintah',
+          'Karena tidak berkaitan dengan kehidupan siswa',
+          'Siswa adalah generasi yang akan merasakan dampak keputusan lingkungan hari ini di masa depan',
+          'Karena akan diujikan di semua mata pelajaran',
+        ],
+      },
+      posttest: {
+        topic: 'Tindakan Keberlanjutan',
+        q: 'Puncak dari perjalanan belajar SIPILAH—dari kesadaran hingga aksi—adalah siswa mampu...',
+        opts: [
+          'Menghafal seluruh istilah lingkungan',
+          'Menyelesaikan seluruh soal tanpa kesalahan',
+          'Mengubah kesadaran menjadi kebiasaan dan tindakan nyata yang berkelanjutan',
+          'Mendapatkan nilai tertinggi di kelas',
+        ],
+      },
+    },
+  ];
+
+  function findQuizEntry(originalText) {
+    for (var i = 0; i < QUIZ_BANK.length; i++) {
+      if (QUIZ_BANK[i].originalQ === originalText) return QUIZ_BANK[i];
+    }
+    return null;
+  }
+
+  function isPreTestVisible() {
+    var text = document.body ? document.body.innerText || '' : '';
+    return text.indexOf('Eksplorasi Awal Kesadaran Ekologis') >= 0 || text.indexOf('Pre-Test SIPILAH') >= 0;
+  }
+
+  function isPostTestVisible() {
+    var text = document.body ? document.body.innerText || '' : '';
+    return text.indexOf('Refleksi Perubahan Pemahaman Ekologis') >= 0 || text.indexOf('Post-Test SIPILAH') >= 0;
+  }
+
+  function patchRunningQuestion(kind) {
+    var qEls = document.querySelectorAll('.text-xl.md\\:text-2xl.font-bold.text-slate-900.leading-snug');
+    for (var q = 0; q < qEls.length; q++) {
+      var qEl = qEls[q];
+      var originalText = qEl.textContent.trim();
+      var entry = findQuizEntry(originalText);
+      if (!entry) continue;
+      var content = entry[kind];
+
+      var card = qEl.parentElement;
+      if (card) {
+        var headerRow = card.querySelector('.flex.items-center.gap-2.mb-3');
+        var topicSpan = headerRow ? headerRow.querySelector('span') : null;
+        if (topicSpan) topicSpan.textContent = content.topic;
+
+        var optsContainer = card.querySelector('.mt-5.space-y-2\\.5');
+        if (optsContainer) {
+          var optTexts = optsContainer.querySelectorAll('button .font-semibold.leading-snug');
+          for (var i = 0; i < optTexts.length && i < content.opts.length; i++) {
+            optTexts[i].textContent = content.opts[i];
+          }
+        }
+      }
+      qEl.textContent = content.q;
+    }
+  }
+
+  function patchResultReview(kind) {
+    var qEls = document.querySelectorAll('.font-semibold.text-slate-800.mt-0\\.5');
+    for (var q = 0; q < qEls.length; q++) {
+      var qEl = qEls[q];
+      var originalText = qEl.textContent.trim();
+      var entry = findQuizEntry(originalText);
+      if (!entry) continue;
+      var content = entry[kind];
+
+      var headerBlock = qEl.parentElement;
+      var metaEl = headerBlock ? headerBlock.querySelector('.text-xs.font-bold.uppercase.tracking-wider.text-slate-500') : null;
+      if (metaEl) {
+        var metaMatch = /^(Soal\s*\d+)/.exec(metaEl.textContent.trim());
+        if (metaMatch) metaEl.textContent = metaMatch[1] + ' · ' + content.topic;
+      }
+
+      var row = headerBlock ? headerBlock.parentElement : null;
+      var expandedWrap = row && row.parentElement ? row.parentElement.querySelector('.pl-14') : null;
+      if (expandedWrap) {
+        var optSpans = expandedWrap.querySelectorAll(':scope > div > span:not([class])');
+        for (var i = 0; i < optSpans.length && i < content.opts.length; i++) {
+          optSpans[i].textContent = content.opts[i];
+        }
+      }
+      qEl.textContent = content.q;
+    }
+  }
+
+  function patchQuizScreen() {
+    if (isPreTestVisible()) {
+      patchRunningQuestion('pretest');
+      patchResultReview('pretest');
+    } else if (isPostTestVisible()) {
+      patchRunningQuestion('posttest');
+      patchResultReview('posttest');
+    }
+  }
+
+  var _quizClickBound = false;
+
+  function bindQuizClickListener() {
+    if (_quizClickBound) return;
+    _quizClickBound = true;
+    document.addEventListener('click', function () {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(patchQuizScreen);
+      });
+    });
   }
 
   /* ─── BOOTSTRAP ─── */
@@ -817,13 +1435,15 @@
     mountImpactJourney();
     mountWasteData();
     mountJourney();
-    patchOnboardingTagline();
+    patchRebranding();
+    patchQuizScreen();
     hideReflectionIfLeftPage();
   }
 
   window.addEventListener('load', function () {
     syncAll();
     patchPredict();
+    bindQuizClickListener();
     var observer = new MutationObserver(syncAll);
     observer.observe(document.getElementById('root') || document.body, { childList: true, subtree: true });
   });

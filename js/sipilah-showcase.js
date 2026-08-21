@@ -321,9 +321,9 @@
         <div class="sip-lap-body">
           <div class="sip-lap-header">
             <div>
-              <h1 class="sip-lap-title">Laporan Proyek AI — SIPILAH</h1>
-              <p class="sip-lap-sub">Kecerdasan Artifisial: Klasifikasi Sampah Sekolah</p>
-              <span class="sip-lap-badge">Selaras CP KKA Fase D · Kurikulum Merdeka</span>
+              <h1 class="sip-lap-title">Laporan Refleksi Pembelajaran Ekopedagogi — SIPILAH</h1>
+              <p class="sip-lap-sub">Teknologi AI sebagai alat untuk memahami hubungan manusia, lingkungan, dan keberlanjutan</p>
+              <span class="sip-lap-badge">Selaras Capaian Pembelajaran IPS Fase D · Kurikulum Merdeka</span>
             </div>
             <div style="text-align:right;flex-shrink:0">
               <div style="font-size:11px;font-weight:800;color:#0f172a">${date}</div>
@@ -385,12 +385,12 @@
           <div class="sip-lap-section">
             <div class="sip-lap-section-title">Alur Belajar yang Diselesaikan</div>
             <div class="sip-lap-steps">
-              ${["Pre-Test","Dataset","Latih AI","Uji Model","Analisis","Post-Test","Laporan"].map((s) => `<div class="sip-lap-step">${s}</div>`).join("")}
+              ${["Eksplorasi Awal","Dataset","Latih AI","Uji Model","Analisis","Refleksi Akhir","Laporan"].map((s) => `<div class="sip-lap-step">${s}</div>`).join("")}
             </div>
           </div>
 
           <div class="sip-lap-footer">
-            <span>SIPILAH — Sistem Pembelajaran KKA Pilah Sampah Sekolah</span>
+            <span>SIPILAH — Media Pembelajaran Ekopedagogi Digital Berbasis AI</span>
             <span>${date}</span>
           </div>
         </div>
@@ -483,17 +483,18 @@
           <div class="sip-cert-corner tr"></div>
           <div class="sip-cert-corner bl"></div>
           <div class="sip-cert-corner br"></div>
-          <div class="sip-cert-eyebrow">SIPILAH · Media Ajar KKA SMP/MTs</div>
+          <div class="sip-cert-eyebrow">SIPILAH · Media Pembelajaran Ekopedagogi Digital SMP/MTs</div>
           <h2 class="sip-cert-title">Sertifikat Penyelesaian Proyek</h2>
-          <p class="sip-cert-sub">Kecerdasan Artifisial: Klasifikasi Sampah Sekolah</p>
+          <p class="sip-cert-sub">Membangun Kesadaran Ekologis dari Sekolah Sehat Menuju Sekolah Berkelanjutan</p>
           <hr class="sip-cert-divider"/>
           <div class="sip-cert-given">Diberikan kepada</div>
           <div class="sip-cert-recipient">${recipient}</div>
           ${subLine ? `<div class="sip-cert-subrec">${subLine}</div>` : ""}
           ${schoolLine ? `<div class="sip-cert-school">${schoolLine}</div>` : ""}
           <p class="sip-cert-desc">
-            Telah menyelesaikan seluruh tahapan Proyek AI SIPILAH: Pre-Test, pengumpulan dataset sampah,
-            pelabelan, pelatihan model, pengujian prediksi, analisis akurasi, Post-Test, dan penyusunan laporan proyek.
+            Telah menyelesaikan seluruh tahapan Proyek Ekopedagogi SIPILAH: Eksplorasi Awal, pengumpulan dataset sampah,
+            pelabelan, proses pembelajaran berbasis data lingkungan menggunakan teknologi AI, pengujian prediksi, analisis akurasi,
+            Refleksi Perubahan Pemahaman Ekologis, dan penyusunan laporan proyek.
           </p>
           <div class="sip-cert-stats">
             <div class="sip-cert-stat"><strong>${metrics.totalDataset || "—"}</strong><span>Foto Dataset</span></div>
@@ -505,7 +506,7 @@
             <span class="sip-cert-date">${date}</span>
             <span class="sip-cert-badge">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Selaras CP KKA Fase D · Kurikulum Merdeka
+              Selaras Capaian Pembelajaran IPS Fase D · Kurikulum Merdeka
             </span>
           </div>
         </div>

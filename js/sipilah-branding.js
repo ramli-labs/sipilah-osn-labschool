@@ -50,7 +50,7 @@
     target.innerHTML = `
       <span class="sip-footer-brand">
         <img src="${RJM_LOGO}" alt="Logo RJM">
-        <span>© 2026 SIPILAH · Media Ajar KKA SMP · RJM</span>
+        <span>© 2026 SIPILAH · Media Pembelajaran Ekopedagogi Digital SMP · RJM</span>
       </span>
     `;
     footer.dataset.rjmBranded = "1";
@@ -109,7 +109,7 @@
     const badge = document.createElement("span");
     badge.setAttribute("data-sipilah-cp-badge", "1");
     badge.className = "sip-cp-badge";
-    badge.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Selaras CP KKA Fase D · Kurikulum Merdeka`;
+    badge.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Selaras Capaian Pembelajaran IPS Fase D · Kurikulum Merdeka`;
     const wrap = footer.querySelector(".flex");
     if (wrap) wrap.appendChild(badge);
     else footer.appendChild(badge);

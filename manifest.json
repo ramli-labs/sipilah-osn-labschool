@@ -1,5 +1,5 @@
 {
-  "name": "SIPILAH — Sistem Pembelajaran KKA Pilah Sampah Sekolah",
+  "name": "SIPILAH — Media Pembelajaran Ekopedagogi Digital Berbasis AI",
   "short_name": "SIPILAH",
   "description": "Media ajar Kecerdasan Artifisial untuk SMP: belajar dataset, label, klasifikasi gambar, akurasi, dan computational thinking melalui aksi pilah sampah sekolah. Web offline-first.",
   "start_url": "./index.html",
@@ -36,7 +36,7 @@
       "sizes": "1280x720",
       "type": "image/svg+xml",
       "form_factor": "wide",
-      "label": "Beranda SIPILAH — alur belajar KKA lengkap"
+      "label": "Beranda SIPILAH — alur belajar ekopedagogi lengkap"
     },
     {
       "src": "assets/screenshot-laporan.svg",

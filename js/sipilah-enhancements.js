@@ -1099,7 +1099,7 @@
 
     if (gain != null) {
       items.push({
-        title: gain >= 0 ? 'Tunjukkan peningkatan literasi AI' : 'Perkuat refleksi belajar',
+        title: gain >= 0 ? 'Tunjukkan perkembangan pemahaman ekologis' : 'Perkuat refleksi belajar',
         body: 'Skor Pre-Test ' + preScore + ' dan Post-Test ' + postScore + ' menghasilkan perubahan ' + (gain >= 0 ? '+' : '') + gain + ' poin. Gunakan ini sebagai bukti dampak pembelajaran.',
       });
     } else {
