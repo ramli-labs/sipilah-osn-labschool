@@ -110,7 +110,7 @@
     '.sip-ar-copy{border:0;border-radius:13px;background:#15803d;color:#fff;padding:10px 13px;font-size:13px;font-weight:900;cursor:pointer;white-space:nowrap}',
     '.sip-ar-copy:hover{background:#166534}',
     '@media print{',
-    '  #sip-eh-warn-overlay,#sip-eh-train-timer,#sip-eh-acc-toast,#sip-live-test-card,#sip-dup-photo-overlay,.sip-ar-copy,.sip-show-btn{display:none!important}',
+    '  #sip-eh-warn-overlay,#sip-eh-train-timer,#sip-eh-acc-toast,#sip-live-test-card,#sip-dup-photo-overlay,.sip-ar-copy,#sip-cert-button{display:none!important}',
     '  #sip-presentation-check-card,#sip-action-recommend-card,#sip-project-log-card,#sip-dataset-quality-card{box-shadow:none!important;background:#fff!important;border-color:#cbd5e1!important;break-inside:avoid;page-break-inside:avoid}',
     '  .sip-pc-score,.sip-dq-score,.sip-pc-item,.sip-ar-item,.sip-log-item{background:#fff!important}',
     '  .sip-ar-list,.sip-pc-list{grid-template-columns:1fr!important}',
@@ -1193,7 +1193,7 @@
     var text = document.body ? document.body.innerText || '' : '';
     var visibleTitle = Array.from(document.querySelectorAll('h1, h2, h3')).some(function (el) {
       var title = (el.textContent || '').trim();
-      return title === 'Laporan Proyek' || title === 'Laporan Proyek Otomatis' || title === 'Mode Presentasi Lomba';
+      return title === 'Laporan Proyek' || title === 'Laporan Proyek Otomatis';
     });
     return visibleTitle && text.indexOf('SIPILAH') >= 0;
   }
@@ -1310,7 +1310,7 @@
         '<div>' +
           '<div class="sip-pc-kicker">Checklist Siap Presentasi</div>' +
           '<div class="sip-pc-title">' + (ready ? 'Proyek siap dipresentasikan' : 'Masih ada yang perlu dilengkapi') + '</div>' +
-          '<div class="sip-pc-sub">Gunakan daftar ini sebelum membuka Mode Presentasi Lomba atau mencetak laporan proyek.</div>' +
+          '<div class="sip-pc-sub">Gunakan daftar ini sebelum mencetak atau membagikan laporan proyek.</div>' +
         '</div>' +
         '<div class="sip-pc-score">' + doneCount + '/' + metrics.items.length + '<span>' + score + '% siap</span></div>' +
       '</div>' +

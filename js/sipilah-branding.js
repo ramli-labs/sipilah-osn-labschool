@@ -1,6 +1,5 @@
 (function () {
   const SIPILAH_LOGO = "assets/logo-sipilah.png";
-  const RJM_LOGO = "assets/logo-rjm.png";
 
   function injectStyles() {
     if (document.getElementById("sipilah-branding-style")) return;
@@ -9,9 +8,6 @@
     style.textContent = `
       .sip-brand-logo{width:100%;height:100%;object-fit:contain;display:block}
       .sip-brand-logo-wrap{background:#fff!important;overflow:hidden}
-      .sip-footer-brand{display:inline-flex;align-items:center;gap:10px;min-width:0}
-      .sip-footer-brand img{width:28px;height:28px;object-fit:contain;border-radius:8px;background:#fff}
-      .sip-footer-brand span{min-width:0}
       .sip-loader-logo{width:72px;height:72px;object-fit:contain;margin:0 auto 10px;display:block}
       .sip-cp-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#166534;background:#dcfce7;border:1px solid #bbf7d0;border-radius:999px;padding:3px 9px;white-space:nowrap}
       .sip-cp-badge svg{flex-shrink:0}
@@ -42,18 +38,13 @@
 
   function replaceFooterCopyright() {
     const footer = document.querySelector("footer");
-    if (!footer || footer.dataset.rjmBranded === "1") return;
+    if (!footer || footer.dataset.footerBranded === "1") return;
     const target = Array.from(footer.querySelectorAll("span")).find((span) =>
       span.textContent.includes("© 2026 SIPILAH")
     );
     if (!target) return;
-    target.innerHTML = `
-      <span class="sip-footer-brand">
-        <img src="${RJM_LOGO}" alt="Logo RJM">
-        <span>© 2026 SIPILAH · Media Pembelajaran Ekopedagogi Digital SMP · RJM</span>
-      </span>
-    `;
-    footer.dataset.rjmBranded = "1";
+    target.textContent = "© 2026 SIPILAH · Media Pembelajaran Ekopedagogi Digital SMP";
+    footer.dataset.footerBranded = "1";
   }
 
   const STEPS = [
